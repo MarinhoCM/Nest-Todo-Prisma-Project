@@ -20,17 +20,4 @@ export class AppController {
   async createTask(@Body() task: TodoInterface): Promise<TodoInterface> {
     return await this.appService.createTask(task);
   }
-
-  @Delete("drop")
-  async dropTask(@Query() query: TodoInterface): Promise<TodoInterface> {
-    const task = await this.appService.getTask(query);
-    if (!task)
-      throw new HttpException(
-        "Não foi identificada nenhuma atividade com as informações repassadas",
-        HttpStatus.NOT_FOUND
-      );
-    else
-      await this.appService.dropTask(task.id);
-      return task;
-  } 
 }
